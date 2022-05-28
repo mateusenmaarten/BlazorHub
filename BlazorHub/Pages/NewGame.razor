@@ -48,7 +48,7 @@ else
     private void Submit(Game args)
     {
         Game game = new Game(args.Name, args.MaxPlayers);
-        nm.NavigateTo("/game/" + game.Name, true);
+        nm.NavigateTo("/game/" + game.Name + "/" + game.Id, true);
     }
 
 
