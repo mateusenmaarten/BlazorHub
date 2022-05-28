@@ -1,0 +1,73 @@
+﻿@page "/newgame"
+@inject NavigationManager nm;
+
+<h1>New Game</h1>
+
+@if (_game == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <RadzenTemplateForm Data="@_game" Submit="@((Game args) => { Submit(args); })">
+        <div class="row">
+            <div class="col-md-6">
+                <RadzenFieldset Text="New Game">
+                    <div class="row">
+                        <div class="col-md-4 align-items-center d-flex">
+                            <RadzenLabel Text="Game name" />
+                        </div>
+                         <div class="col-md-8">
+                            <RadzenTextBox style="width: 100%;" Name="Name" @bind-Value="_game.Name"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="align-items-center d-flex col-md-3">
+                            <RadzenLabel Text="Max. number of players" />
+                        </div>
+                        <div class="col-md-3">
+                            <RadzenNumeric Placeholder="300" style="width: 100%;" Name="MaxPlayers" @bind-Value="_game.MaxPlayers" />
+                        </div>
+                    </div>
+                </RadzenFieldset>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                </div>
+            </div>
+        </div>
+    </RadzenTemplateForm>
+}
+
+
+@code {
+
+    private Game _game = new Game();
+
+    private void Submit(Game args)
+    {
+        Game game = new Game(args.Name, args.MaxPlayers);
+        nm.NavigateTo("/game/" + game.Name, true);
+    }
+
+
+    public class Game
+    {
+        public Game()
+        {
+
+        }
+
+        public Game(string name, int maxPlayers)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            MaxPlayers = maxPlayers;
+        }
+
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public int MaxPlayers { get; set; }
+    }
+}
