@@ -17,6 +17,9 @@ builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
 builder.Services.AddScoped<ContextMenuService>();
 
+//State
+builder.Services.AddSingleton<State>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

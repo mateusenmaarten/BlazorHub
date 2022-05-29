@@ -1,7 +1,9 @@
 ﻿@page "/newgame"
+@using System.Diagnostics
 @inject NavigationManager nm;
+@inject State state;
 
-<h1>New Game</h1>
+@*<h1>New Game</h1>*@
 
 @if (_game == null)
 {
@@ -12,28 +14,37 @@ else
     <RadzenTemplateForm Data="@_game" Submit="@((Game args) => { Submit(args); })">
         <div class="row">
             <div class="col-md-6">
-                <RadzenFieldset Text="New Game">
+                <RadzenFieldset Text="Create a new game">
                     <div class="row">
                         <div class="col-md-4 align-items-center d-flex">
-                            <RadzenLabel Text="Game name" />
+                            <RadzenLabel Text="Name" />
                         </div>
                          <div class="col-md-8">
                             <RadzenTextBox style="width: 100%;" Name="Name" @bind-Value="_game.Name"/>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="align-items-center d-flex col-md-3">
-                            <RadzenLabel Text="Max. number of players" />
+                        <div class="col-md-4 align-items-center d-flex">
+                            <RadzenLabel Text="Password" />
+                        </div>
+                         <div class="col-md-8">
+                            <RadzenTextBox style="width: 100%;" Name="Password" @bind-Value="_game.Password"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="align-items-center d-flex col-md-4">
+                            <RadzenLabel Text="Players" />
                         </div>
                         <div class="col-md-3">
                             <RadzenNumeric Placeholder="300" style="width: 100%;" Name="MaxPlayers" @bind-Value="_game.MaxPlayers" />
                         </div>
                     </div>
+                    
                 </RadzenFieldset>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
-                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Create" />
                 </div>
             </div>
         </div>
@@ -45,10 +56,13 @@ else
 
     private Game _game = new Game();
 
+
     private void Submit(Game args)
     {
-        Game game = new Game(args.Name, args.MaxPlayers);
-        nm.NavigateTo("/game/" + game.Name + "/" + game.Id, true);
+        Game game = new Game(args.Name, args.MaxPlayers, args.Password);
+        nm.NavigateTo("/activegame/" + game.Name + "/" + game.Id, true);
+
+        state.GamesToJoin.Add(game);
     }
 
 
@@ -66,8 +80,17 @@ else
             MaxPlayers = maxPlayers;
         }
 
+        public Game(string name, int maxPlayers, string pwd)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            MaxPlayers = maxPlayers;
+            Password = pwd;
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int MaxPlayers { get; set; }
+        public string? Password { get; set; }
     }
 }

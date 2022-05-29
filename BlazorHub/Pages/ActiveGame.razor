@@ -1,0 +1,25 @@
+﻿@page "/activegame/{Name}/{Id}"
+@using static BlazorHub.Pages.NewGame
+@inject State state;
+
+<h1>Game: @Name</h1>
+
+
+<h2>Active game logic</h2>
+
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    IEnumerable<Game> games;
+
+    protected override void OnInitialized()
+    {
+        games = state.GamesToJoin.ToList();
+    }
+
+}

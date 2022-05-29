@@ -1,10 +1,10 @@
-﻿@page "/chatroom"
+﻿@page "/lobby"
 @inject NavigationManager navigationManager
 @using Microsoft.AspNetCore.SignalR.Client;
 
 <h1>Welcome to the Cards against Humanity Lobby</h1>
 <NavLink href="newgame"><RadzenButton Text="New Game" ></RadzenButton></NavLink>
-<RadzenButton Text="Join Game"></RadzenButton>
+<NavLink href="joingame"><RadzenButton Text="Join Game"></RadzenButton></NavLink>
 <hr />
 
 @if (!_isChatting)
@@ -54,6 +54,8 @@ else
 }
 
 @code {
+    
+
     // flag to indicate chat status
     private bool _isChatting = false;
 
