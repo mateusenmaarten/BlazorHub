@@ -1,4 +1,5 @@
 ﻿using static BlazorHub.Pages.NewGame;
+using CAH_Blazor.Models;
 
 namespace BlazorHub
 {

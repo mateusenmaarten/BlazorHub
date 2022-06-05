@@ -1,5 +1,8 @@
 ﻿@page "/newgame"
+
 @using System.Diagnostics
+@using CAH_Blazor.Models
+
 @inject NavigationManager nm;
 @inject State state;
 
@@ -19,18 +22,20 @@ else
                         <div class="col-md-4 align-items-center d-flex">
                             <RadzenLabel Text="Name" />
                         </div>
-                         <div class="col-md-8">
-                            <RadzenTextBox style="width: 100%;" Name="Name" @bind-Value="_game.Name"/>
+                        <div class="col-md-8">
+                            <RadzenTextBox style="width: 100%;" Name="Name" @bind-Value="_game.Name" />
                         </div>
                     </div>
+                    <br />
                     <div class="row">
                         <div class="col-md-4 align-items-center d-flex">
                             <RadzenLabel Text="Password" />
                         </div>
-                         <div class="col-md-8">
-                            <RadzenTextBox style="width: 100%;" Name="Password" @bind-Value="_game.Password"/>
+                        <div class="col-md-8">
+                            <RadzenTextBox style="width: 100%;" Name="Password" @bind-Value="_game.Password" />
                         </div>
                     </div>
+                    <br />
                     <div class="row">
                         <div class="align-items-center d-flex col-md-4">
                             <RadzenLabel Text="Players" />
@@ -39,7 +44,7 @@ else
                             <RadzenNumeric Placeholder="300" style="width: 100%;" Name="MaxPlayers" @bind-Value="_game.MaxPlayers" />
                         </div>
                     </div>
-                    
+
                 </RadzenFieldset>
             </div>
             <div class="row justify-content-center">
@@ -53,44 +58,14 @@ else
 
 
 @code {
-
     private Game _game = new Game();
 
 
     private void Submit(Game args)
     {
-        Game game = new Game(args.Name, args.MaxPlayers, args.Password);
+        var game = new Game(args.Name, args.MaxPlayers, args.Password);
         nm.NavigateTo("/activegame/" + game.Name + "/" + game.Id, true);
 
         state.GamesToJoin.Add(game);
-    }
-
-
-    public class Game
-    {
-        public Game()
-        {
-
-        }
-
-        public Game(string name, int maxPlayers)
-        {
-            Id = Guid.NewGuid();
-            Name = name;
-            MaxPlayers = maxPlayers;
-        }
-
-        public Game(string name, int maxPlayers, string pwd)
-        {
-            Id = Guid.NewGuid();
-            Name = name;
-            MaxPlayers = maxPlayers;
-            Password = pwd;
-        }
-
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public int MaxPlayers { get; set; }
-        public string? Password { get; set; }
     }
 }
