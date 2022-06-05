@@ -1,4 +1,6 @@
-﻿namespace CAH_Blazor.Models
+﻿using FluentValidation;
+
+namespace CAH_Blazor.Models
 {
     public class Game
     {
@@ -26,5 +28,15 @@
         public string Name { get; set; }
         public int MaxPlayers { get; set; }
         public string Password { get; set; }
+    }
+
+    public class GameValidator : AbstractValidator<Game>
+    {
+        public GameValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Please enter a name");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Please enter a password");
+            RuleFor(x => x.MaxPlayers).GreaterThan(2).WithMessage("3 Players or more required");
+        }
     }
 }

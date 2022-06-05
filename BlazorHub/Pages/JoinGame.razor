@@ -25,18 +25,17 @@ else
                             <RadzenTemplateForm Data="@game" Submit="@((Game args) => { Submit(args); })">
                                 <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
                                     <div class="container">
-                                        <div class="row width: 100%">
-                                            <div>
-                                                <div class="row d-flex">
-                                                    <div class="col-md-3 col-lg-3">
+                                        <div >
+                                                <div class="row">
+                                                    <div class="col-md-3">
                                                         <h5 class="mb-0">Game</h5>
                                                         <p class="mb-sm-2 mb-lg-0">@(game.Name)</p>
                                                     </div>
-                                                    <div class="col-md-3 col-lg-3">
+                                                    <div class="col-md-3">
                                                         <h5 class="mb-0">Max players</h5>
                                                         <p class="mb-sm-2 mb-lg-0">@(game.MaxPlayers)</p>
                                                     </div>
-                                                    <div class="col-md-3 col-lg-3">
+                                                    <div class="col-md-3">
                                                         <h5 class="mb-0">Password</h5>
                                                         <RadzenPassword Placeholder="Enter password..." Change=@(args => OnChange(args,game)) Class="w-100" />
                                                     </div>
@@ -44,7 +43,6 @@ else
                                                         <RadzenButton Disabled="!_passwordIsCorrect" Text="Join" Class="w-100" ButtonType="ButtonType.Submit" />
                                                     </div>
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </RadzenCard>

@@ -15,6 +15,7 @@
 else
 {
     <RadzenTemplateForm Data="@_game" Submit="@((Game args) => { Submit(args); })">
+        <FluentValidationValidator />
         <div class="row">
             <div class="col-md-6">
                 <RadzenFieldset Text="Create a new game">
@@ -24,6 +25,7 @@ else
                         </div>
                         <div class="col-md-8">
                             <RadzenTextBox style="width: 100%;" Name="Name" @bind-Value="_game.Name" />
+                            <ValidationMessage For="() => _game.Name" />
                         </div>
                     </div>
                     <br />
@@ -33,6 +35,7 @@ else
                         </div>
                         <div class="col-md-8">
                             <RadzenTextBox style="width: 100%;" Name="Password" @bind-Value="_game.Password" />
+                            <ValidationMessage For="() => _game.Password" />
                         </div>
                     </div>
                     <br />
@@ -40,8 +43,9 @@ else
                         <div class="align-items-center d-flex col-md-4">
                             <RadzenLabel Text="Players" />
                         </div>
-                        <div class="col-md-3">
-                            <RadzenNumeric Placeholder="300" style="width: 100%;" Name="MaxPlayers" @bind-Value="_game.MaxPlayers" />
+                        <div class="col-md-8">
+                            <RadzenNumeric TValue="int" style="width: 100%;" Name="MaxPlayers" @bind-Value="_game.MaxPlayers"/>
+                            <ValidationMessage For="() => _game.MaxPlayers" style="width: 100%"/>
                         </div>
                     </div>
 
@@ -59,6 +63,11 @@ else
 
 @code {
     private Game _game = new Game();
+
+    protected override void OnInitialized()
+    {
+        _game.MaxPlayers = 3;
+    }
 
 
     private void Submit(Game args)
