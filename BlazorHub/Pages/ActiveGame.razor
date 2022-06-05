@@ -7,6 +7,8 @@
 
 <h1>Game: @Name</h1>
 
+<Lobby  />
+
 
 <h2>Active game logic</h2>
 
@@ -18,11 +20,13 @@
     [Parameter]
     public string Id { get; set; }
 
-    IEnumerable<Game> games;
+    //IEnumerable<Game> games;
+
+    Dictionary<Guid, Shared.ChatContext> context = new Dictionary<Guid, Shared.ChatContext>();
 
     protected override void OnInitialized()
     {
-        games = state.GamesToJoin.ToList();
+
     }
 
 }

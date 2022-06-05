@@ -73,8 +73,9 @@ else
     private void Submit(Game args)
     {
         var game = new Game(args.Name, args.MaxPlayers, args.Password);
+        state.GamesToJoin.Add(game);
+
         nm.NavigateTo("/activegame/" + game.Name + "/" + game.Id, true);
 
-        state.GamesToJoin.Add(game);
     }
 }

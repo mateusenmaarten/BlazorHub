@@ -2,6 +2,8 @@
 
 namespace CAH_Blazor.Models
 {
+    
+
     public class Game
     {
         public Game()

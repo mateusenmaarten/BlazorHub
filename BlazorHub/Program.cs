@@ -2,6 +2,7 @@ using BlazorHub;
 using BlazorHub.Data;
 using Radzen;
 using FluentValidation;
+using BlazorHub.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
 builder.Services.AddScoped<ContextMenuService>();
+builder.Services.AddSingleton<ChatService>();
+builder.Services.AddSingleton<UserContext>();
+
 
 //State
 builder.Services.AddSingleton<State>();

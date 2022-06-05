@@ -5,7 +5,13 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorHub", "BlazorHub\BlazorHub.csproj", "{DAE63403-CE76-4FB7-9854-D9AEA46F9C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAH-Blazor.Models", "CAH-Blazor.Models\CAH-Blazor.Models.csproj", "{F7D0C832-D56E-4D9C-9C4F-8E3C1F7B6B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAH-Blazor.Models", "CAH-Blazor.Models\CAH-Blazor.Models.csproj", "{F7D0C832-D56E-4D9C-9C4F-8E3C1F7B6B34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAH.Backend", "CAH.Backend\CAH.Backend.csproj", "{25910851-8919-457E-8877-AEF07A681CBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAH.Data", "CAH.Data\CAH.Data.csproj", "{0E9404DA-97D1-4F9A-AA1C-4D7CA3F6132B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAH.Testing", "CAH.Testing\CAH.Testing.csproj", "{AE1394E5-95BE-4CB1-A660-1D5481D86B21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{F7D0C832-D56E-4D9C-9C4F-8E3C1F7B6B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7D0C832-D56E-4D9C-9C4F-8E3C1F7B6B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D0C832-D56E-4D9C-9C4F-8E3C1F7B6B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25910851-8919-457E-8877-AEF07A681CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25910851-8919-457E-8877-AEF07A681CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25910851-8919-457E-8877-AEF07A681CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25910851-8919-457E-8877-AEF07A681CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9404DA-97D1-4F9A-AA1C-4D7CA3F6132B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9404DA-97D1-4F9A-AA1C-4D7CA3F6132B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9404DA-97D1-4F9A-AA1C-4D7CA3F6132B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9404DA-97D1-4F9A-AA1C-4D7CA3F6132B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE1394E5-95BE-4CB1-A660-1D5481D86B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE1394E5-95BE-4CB1-A660-1D5481D86B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE1394E5-95BE-4CB1-A660-1D5481D86B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE1394E5-95BE-4CB1-A660-1D5481D86B21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
