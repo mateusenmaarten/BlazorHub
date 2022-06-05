@@ -17,7 +17,7 @@
     </p>
 
     <input type="text" maxlength="32" @bind="@userContext.UserName" />
-    <button type="button" @onclick="@login"><span class="oi oi-chat" aria-hidden="true"></span> Chat!</button>
+    <button type="button" @onclick="@Login"><span class="oi oi-chat" aria-hidden="true"></span> Chat!</button>
 
     // Error messages
     @if (chatContext.Message != null)
@@ -60,11 +60,11 @@ else
 
     static public Guid LobbyGuid { get; } = Guid.Parse("d49e4f19-03eb-4583-a4f9-d51a5c2927e9");
 
-    public void login() {
+    public void Login() {
 
         bool isValid = userContext.ValidateInput();
         if (isValid) {
-            chatContext.login(userContext);
+            chatContext.Login(userContext);
             chatContext.Chat();
         
         }

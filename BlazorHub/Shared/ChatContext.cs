@@ -38,20 +38,13 @@ namespace BlazorHub.Shared
         public event EventHandler ChatMessagesUpdated;
 
         public void Login(UserContext uc) {
-
-
             this.uc = uc;
         }
 
         public async Task Chat()
         {
             // check username is valid
-            // move validation to user context
-            if (string.IsNullOrWhiteSpace(uc.UserName))
-            {
-                uc.UserName = "Please enter a name";
-                return;
-            };
+
 
             try
             {
