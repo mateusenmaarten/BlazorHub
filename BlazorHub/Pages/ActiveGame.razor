@@ -4,13 +4,17 @@
 @using CAH_Blazor.Models
 
 @inject State state;
+@inject ChatService chatService;
+@inject NavigationManager navigationManager;
 
 <h1>Game: @Name</h1>
 
-<Lobby  />
-
-
 <h2>Active game logic</h2>
+
+<h2>Game chat</h2>
+
+<ChatBox Id="@Id" />
+<ChatBox Id="" />
 
 
 @code {
@@ -20,13 +24,21 @@
     [Parameter]
     public string Id { get; set; }
 
-    //IEnumerable<Game> games;
-
-    Dictionary<Guid, Shared.ChatContext> context = new Dictionary<Guid, Shared.ChatContext>();
+    ChatContext chatContext;
 
     protected override void OnInitialized()
     {
+        Guid gameID = Guid.Parse(this.Id);
 
+        // abbuse gameId as chatContext Id
+
+        chatContext = chatService.ResolveChatContext(gameID, navigationManager);
+        chatContext.ChatMessagesUpdated += updated;
+    }
+
+    private void updated(object sender, EventArgs arg)
+    {
+        StateHasChanged();
     }
 
 }

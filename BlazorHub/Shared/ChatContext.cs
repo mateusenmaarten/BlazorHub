@@ -43,9 +43,6 @@ namespace BlazorHub.Shared
 
         public async Task Chat()
         {
-            // check username is valid
-
-
             try
             {
                 // Start chatting and force refresh UI.
@@ -58,7 +55,7 @@ namespace BlazorHub.Shared
                 // Create the chat client
                 string baseUrl = navigationManager.BaseUri;
 
-                _hubUrl = baseUrl.TrimEnd('/') + BlazorChatSampleHub.HubUrl;
+                _hubUrl = baseUrl.TrimEnd('/') + $"/chat?chatGUID=" + guid.ToString(); 
 
                 _hubConnection = new HubConnectionBuilder()
                     .WithUrl(_hubUrl)
@@ -110,7 +107,7 @@ namespace BlazorHub.Shared
         {
             if (IsChatting && !string.IsNullOrWhiteSpace(NewMessage))
             {
-                await _hubConnection.SendAsync("Broadcast", uc.UserName, NewMessage);
+                await _hubConnection.SendAsync("Broadcast", uc.UserName, NewMessage, this.guid);
 
                 NewMessage = string.Empty;
             }

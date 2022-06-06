@@ -15,9 +15,12 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
+
 builder.Services.AddScoped<ContextMenuService>();
-builder.Services.AddSingleton<ChatService>();
-builder.Services.AddSingleton<UserContext>();
+
+builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<UserContext>();
+builder.Services.AddScoped<CAHGameService>();
 
 
 //State
@@ -41,6 +44,6 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
-app.MapHub<BlazorChatSampleHub>(BlazorChatSampleHub.HubUrl);
+app.MapHub<ChatHub>(ChatHub.HubUrl);
 
 app.Run();

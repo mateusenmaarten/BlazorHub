@@ -7,7 +7,7 @@ namespace BlazorHub.Shared
         private Dictionary<Guid, ChatContext> _chatContexts = new Dictionary<Guid, ChatContext>();
 
 
-        public ChatContext Resolve(Guid guid, NavigationManager navigationManager)
+        public ChatContext ResolveChatContext(Guid guid, NavigationManager navigationManager)
         {
 
             if (!_chatContexts.ContainsKey(guid)) {

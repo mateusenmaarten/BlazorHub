@@ -1,4 +1,5 @@
-﻿@page "/lobby"
+﻿@page "/chatbox"
+
 @inject NavigationManager navigationManager
 @inject ChatService chatService
 @inject UserContext userContext
@@ -6,14 +7,6 @@
 
 @using Microsoft.AspNetCore.SignalR.Client;
 
-<h1>Welcome to the Cards against Humanity Lobby</h1>
-<NavLink href="newgame"><RadzenButton Text="New Game" ></RadzenButton></NavLink>
-<NavLink href="joingame"><RadzenButton Text="Join Game"></RadzenButton></NavLink>
-<hr />
-
-@*<ChatBox />*@
-
-@*
 @if (!chatContext.IsChatting)
 {
     <p>
@@ -36,6 +29,8 @@ else
     <div class="alert alert-secondary mt-4" role="alert">
         <span class="oi oi-person mr-2" aria-hidden="true"></span>
         <span>You are connected as <b>@userContext.UserName</b></span>
+        <span>chatcontext hash <b>@chatContext.GetHashCode()</b></span>
+        <span>chatcontext messageCount <b>@chatContext.Messages.Count</b></span>
         <button class="btn btn-sm btn-warning ml-md-auto" @onclick="@chatContext.DisconnectAsync">Disconnect</button>
     </div>
     // display messages
@@ -58,33 +53,41 @@ else
         <textarea class="input-lg" placeholder="enter your comment" @bind="@chatContext.NewMessage"></textarea>
         <button class="btn btn-default" @onclick="@(() => @chatContext.SendAsync())">Send</button>
     </div>
-}*@
+}
 
 @code {
 
-    //static public Guid LobbyGuid { get; } = Guid.Parse("d49e4f19-03eb-4583-a4f9-d51a5c2927e9");
+    [Parameter]
+    public string Id { get; set; }
 
-    //public void Login() {
+    public void Login() {
 
-    //    bool isValid = userContext.ValidateInput();
-    //    if (isValid) {
-    //        chatContext.Login(userContext);
-    //        chatContext.Chat();
-    //    }
-    //}
+        bool isValid = userContext.ValidateInput();
+        if (isValid) {
+            chatContext.Login(userContext);
+            chatContext.Chat();
+        }
+    }
 
-    //ChatContext chatContext;
+    ChatContext chatContext;
 
-    //protected override void OnInitialized()
-    //{
-    //    chatContext = chatService.ResolveChatContext(LobbyGuid, navigationManager);
-    //    chatContext.ChatMessagesUpdated += updated;
-    //}
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Id))
+        {
+            // assume lobby
+            Id = "d49e4f19-03eb-4583-a4f9-d51a5c2927e9";
+        }
 
-    //private void updated(object sender, EventArgs arg)
-    //{
-    //    StateHasChanged();
-    //}
+        Guid guid = Guid.Parse(Id);
+        chatContext = chatService.ResolveChatContext(guid, navigationManager);
+        chatContext.ChatMessagesUpdated += updated;
+    }
+
+    private void updated(object sender, EventArgs arg)
+    {
+        StateHasChanged();
+    }
 
     //// flag to indicate chat status
     //private bool _isChatting = false;
