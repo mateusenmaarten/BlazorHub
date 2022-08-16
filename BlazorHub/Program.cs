@@ -1,5 +1,4 @@
 using BlazorHub;
-using BlazorHub.Data;
 using Radzen;
 using FluentValidation;
 using BlazorHub.Shared;
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 //Radzen
 builder.Services.AddScoped<DialogService>();
