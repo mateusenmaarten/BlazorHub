@@ -8,45 +8,42 @@
 
 <h1>Select a game to join</h1>
 
-
 @if (state.GamesToJoin.Count < 1)
 {
     <h2>There are currently no games, please create one</h2>
-    <NavLink href="newgame"><RadzenButton Text="Create new game"></RadzenButton></NavLink>
+    <NavLink href="newgame"><RadzenButton Text="Create game"></RadzenButton></NavLink>
 }
 else
 {
+    <h1 class="mt-4">Active games</h1>
     <div class="container">
-        <div class="row">
+        <div class="row py-5">
             <div class="col">
                 <RadzenCard>
                     <RadzenDataList WrapItems="true" AllowPaging="true" Data="@games" TItem="Game" PageSize="5" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true">
                         <Template Context="game">
-                            <RadzenTemplateForm Data="@game" Submit="@((Game args) => { Submit(args); })">
-                                <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
-                                    <div class="container">
-                                        <div >
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <h5 class="mb-0">Game</h5>
-                                                        <p class="mb-sm-2 mb-lg-0">@(game.Name)</p>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <h5 class="mb-0">Max players</h5>
-                                                        <p class="mb-sm-2 mb-lg-0">@(game.MaxPlayers)</p>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <h5 class="mb-0">Password</h5>
-                                                        <RadzenPassword Placeholder="Enter password..." Change=@(args => OnChange(args,game)) Class="w-100" />
-                                                    </div>
-                                                    <div class="col-md-3 p-3">
-                                                        <RadzenButton Disabled="!_passwordIsCorrect" Text="Join" Class="w-100" ButtonType="ButtonType.Submit" />
-                                                    </div>
+                            <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-3 p-3">
+                                            <h2>@(game.Name)</h2>
+                                        </div>
+                                        <div class="col-lg-7 p-3">
+                                            <div class="row d-flex">
+                                                <div class="col-md-7 col-lg-7">
+                                                    <h6 class="mb-0">Maximum number of players</h6>
+                                                    <p class="mb-sm-2 mb-lg-0">@(game.MaxPlayers)</p>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 p-3">
+                                            <RadzenButton Text="Join" 
+                                                Click="() => Submit(game)" 
+                                                Class="w-100" ButtonType="ButtonType.Submit"></RadzenButton>
                                         </div>
                                     </div>
-                                </RadzenCard>
-                            </RadzenTemplateForm>
+                                </div>
+                            </RadzenCard>
                         </Template>
                     </RadzenDataList>
                 </RadzenCard>
@@ -83,10 +80,7 @@ else
 
     private void Submit(Game args)
     {
-        if (_passwordIsCorrect)
-        {
-            nm.NavigateTo("/activegame/" + args.Name + "/" + args.Id, true);
-        }
+        nm.NavigateTo("/activegame/" + args.Name + "/" + args.Id, true);
     }
 
 }

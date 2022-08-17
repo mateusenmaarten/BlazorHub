@@ -4,8 +4,6 @@ namespace BlazorHub
 {
     public class ChatHub : Hub
     {
-        
-
         public const string HubUrl = "/chat";
         public async Task Broadcast(string username, string message, Guid chatGuid)
         {

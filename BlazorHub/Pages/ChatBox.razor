@@ -14,7 +14,7 @@
     </p>
 
     <input type="text" maxlength="32" @bind="@userContext.UserName" />
-    <button type="button" @onclick="@Login"><span class="oi oi-chat" aria-hidden="true"></span> Chat!</button>
+    <RadzenButton type="button" ButtonStyle="ButtonStyle.Primary" Click="@Login"><span class="oi oi-chat" aria-hidden="true"></span> Chat!</RadzenButton>
 
     // Error messages
     @if (chatContext.Message != null)
